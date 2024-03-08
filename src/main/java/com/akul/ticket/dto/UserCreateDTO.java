@@ -14,7 +14,7 @@ public class UserCreateDTO {
     @Size(min = 4, max = 50)
     private String username;
 
-    public User mapToUser() {
+    public User mapToModel() {
         User user = new User();
         user.setUsername(username);
         return user;

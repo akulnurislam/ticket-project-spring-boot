@@ -24,7 +24,7 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> create(@RequestBody @Valid UserCreateDTO dto) {
-        userService.create(dto.mapToUser());
+        userService.create(dto.mapToModel());
         return ResponseEntity.created(URI.create("/users")).build();
     }
 }
