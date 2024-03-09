@@ -127,6 +127,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDTO);
     }
 
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ErrorDTO> handleUnauthorizedException(@NonNull UnauthorizedException ex, @NonNull WebRequest req) {
+        ErrorDTO errorDTO = ErrorDTO.builder()
+                .timestamp(DateUtil.timestamp())
+                .status(HttpStatus.UNAUTHORIZED.value())
+                .error(ex.getMessage())
+                .path(req.getDescription(false).substring(4))
+                .build();
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorDTO);
+    }
+
     private String extractEnumValues(String errorMessage) {
         var joiner = new StringJoiner(", ", "[", "]");
         var pattern = Pattern.compile("\\[([^]]+)]");
