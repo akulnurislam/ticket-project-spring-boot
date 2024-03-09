@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.lang.NonNull;
 
 import java.util.Date;
 import java.util.List;
@@ -28,7 +29,7 @@ public class TicketCategoryDTO {
     @JsonProperty("updated_at")
     private Date updatedAt;
 
-    public static TicketCategoryDTO mapFromModel(TicketCategory model) {
+    public static TicketCategoryDTO mapFromModel(@NonNull TicketCategory model) {
         return TicketCategoryDTO.builder()
                 .id(model.getId())
                 .name(model.getName())
@@ -37,7 +38,7 @@ public class TicketCategoryDTO {
                 .build();
     }
 
-    public static List<TicketCategoryDTO> mapFromModels(List<TicketCategory> models) {
+    public static List<TicketCategoryDTO> mapFromModels(@NonNull List<TicketCategory> models) {
         return models.stream()
                 .map(TicketCategoryDTO::mapFromModel)
                 .toList();
