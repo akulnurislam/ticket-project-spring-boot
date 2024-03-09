@@ -15,7 +15,7 @@ public class UserCreateDTO {
     private String username;
 
     public User mapToModel() {
-        User user = new User();
+        var user = new User();
         user.setUsername(username);
         return user;
     }

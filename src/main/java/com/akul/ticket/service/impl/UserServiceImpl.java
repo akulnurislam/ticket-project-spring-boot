@@ -6,6 +6,8 @@ import com.akul.ticket.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
@@ -15,5 +17,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 }
