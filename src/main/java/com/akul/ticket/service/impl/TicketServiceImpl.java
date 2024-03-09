@@ -8,8 +8,10 @@ import com.akul.ticket.repository.TicketRepository;
 import com.akul.ticket.service.TicketCategoryService;
 import com.akul.ticket.service.TicketService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @RequiredArgsConstructor
@@ -20,7 +22,7 @@ public class TicketServiceImpl implements TicketService {
     private final TicketCategoryService ticketCategoryService;
 
     @Override
-    public Ticket create(Ticket ticket) {
+    public Ticket create(@NonNull Ticket ticket) {
         if (Objects.isNull(ticket.getTicketCategory()) ||
                 !ticketCategoryService.isExists(ticket.getTicketCategory().getId())) {
             throw new NotFoundException("ticket category not found");
@@ -39,5 +41,16 @@ public class TicketServiceImpl implements TicketService {
         }
 
         return ticketRepository.save(ticket);
+    }
+
+    @Override
+    public List<Ticket> getAll(String status) {
+        TicketStatus ticketStatus = TicketStatus.valueOfOrNull(status);
+
+        if (Objects.isNull(ticketStatus)) {
+            return ticketRepository.findAll();
+        }
+
+        return ticketRepository.findAllByStatus(ticketStatus);
     }
 }
