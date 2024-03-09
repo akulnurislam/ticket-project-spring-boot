@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.sql.Time;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Objects;
 
@@ -59,7 +60,7 @@ public class BookingServiceImpl implements BookingService {
         }
 
         // validate hour availability
-        var currentHour = Time.valueOf(LocalTime.now());
+        var currentHour = Time.valueOf(LocalTime.now(ZoneId.of("GMT+7")));
         var availableFrom = ticket.getAvailableFrom();
         var availableTo = ticket.getAvailableTo();
         if (currentHour.before(availableFrom) || currentHour.after(availableTo)) {
