@@ -1,7 +1,8 @@
 package com.akul.ticket.service;
 
 import com.akul.ticket.model.Booking;
+import com.akul.ticket.model.UserBooking;
 
 public interface BookingService {
-    Booking create(Booking booking);
+    UserBooking create(Booking booking);
 }
