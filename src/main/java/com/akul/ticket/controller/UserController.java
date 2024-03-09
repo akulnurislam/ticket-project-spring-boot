@@ -1,11 +1,12 @@
 package com.akul.ticket.controller;
 
 import com.akul.ticket.annotation.ApiCreateResponse;
-import com.akul.ticket.annotation.ApiListResponse;
 import com.akul.ticket.dto.request.UserCreateDTO;
 import com.akul.ticket.dto.response.UserDTO;
 import com.akul.ticket.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +37,9 @@ public class UserController {
     }
 
     @Operation(summary = "Get Users")
-    @ApiListResponse
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "ok"),
+    })
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<UserDTO>> getAll() {
