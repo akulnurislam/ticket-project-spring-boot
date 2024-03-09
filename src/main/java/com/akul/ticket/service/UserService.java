@@ -6,5 +6,8 @@ import java.util.List;
 
 public interface UserService {
     User create(User user);
+
+    boolean isExistsByUsername(String username);
+
     List<User> getAll();
 }
