@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
         type = SecuritySchemeType.APIKEY,
         in = SecuritySchemeIn.HEADER,
         paramName = "Authorization",
-        description = "please put username, Authorization: yourusername"
+        description = "please put username"
 )
 // @EnableWebSecurity
 public class SecurityConfig {
