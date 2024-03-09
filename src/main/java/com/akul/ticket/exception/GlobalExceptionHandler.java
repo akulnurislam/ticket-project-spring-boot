@@ -2,6 +2,7 @@ package com.akul.ticket.exception;
 
 import com.akul.ticket.dto.ErrorDTO;
 import com.akul.ticket.util.DateUtil;
+import com.akul.ticket.util.StringUtil;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.postgresql.util.PSQLException;
 import org.postgresql.util.PSQLState;
@@ -28,7 +29,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorDTO> handleMethodArgumentNotValidException(@NonNull MethodArgumentNotValidException ex, @NonNull WebRequest req) {
         var fields = new ArrayList<String>();
         for (var error : ex.getBindingResult().getFieldErrors()) {
-            var fieldMessage = String.format("%s - %s", camelToSnake(error.getField()), error.getDefaultMessage());
+            var fieldMessage = String.format("%s - %s", StringUtil.camelToSnake(error.getField()), error.getDefaultMessage());
             fields.add(fieldMessage);
         }
         var errorDTO = ErrorDTO.builder()
@@ -147,9 +148,5 @@ public class GlobalExceptionHandler {
             return matcher.group(1);
         }
         return "field_enum";
-    }
-
-    private String camelToSnake(String camelCase) {
-        return camelCase.replaceAll("([a-z0-9])([A-Z])", "$1_$2").toLowerCase();
     }
 }
