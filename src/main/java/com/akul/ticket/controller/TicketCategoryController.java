@@ -27,18 +27,18 @@ public class TicketCategoryController {
     private final TicketCategoryService ticketCategoryService;
 
     @Operation(summary = "Create a Ticket Category")
+    @ApiCreateResponse
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiCreateResponse
     public ResponseEntity<TicketCategoryDTO> create(@RequestBody @Valid @NonNull TicketCategoryCreateDTO dto) {
         var ticketCategory = ticketCategoryService.create(dto.mapToModel());
         return ResponseEntity.created(URI.create("/ticket-categories")).body(TicketCategoryDTO.mapFromModel(ticketCategory));
     }
 
     @Operation(summary = "Get Ticket Categories")
+    @ApiListResponse
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    @ApiListResponse
     public ResponseEntity<List<TicketCategoryDTO>> getAll() {
         var ticketCategories = ticketCategoryService.getAll();
         return ResponseEntity.ok(TicketCategoryDTO.mapFromModels(ticketCategories));

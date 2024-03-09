@@ -27,18 +27,18 @@ public class UserController {
     private final UserService userService;
 
     @Operation(summary = "Create a User")
+    @ApiCreateResponse
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiCreateResponse
     public ResponseEntity<UserDTO> create(@RequestBody @Valid @NonNull UserCreateDTO dto) {
         var user = userService.create(dto.mapToModel());
         return ResponseEntity.created(URI.create("/users")).body(UserDTO.mapFromModel(user));
     }
 
     @Operation(summary = "Get Users")
+    @ApiListResponse
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    @ApiListResponse
     public ResponseEntity<List<UserDTO>> getAll() {
         var users = userService.getAll();
         return ResponseEntity.ok(UserDTO.mapFromModels(users));

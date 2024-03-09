@@ -34,21 +34,21 @@ public class TicketController {
     private final TicketService ticketService;
 
     @Operation(summary = "Create a Ticket")
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
     @ApiCreateResponse
     @ApiResponses(value = {
             @ApiResponse(responseCode = "404", description = "not found", content = @Content(schema = @Schema(implementation = ErrorDTO.class))),
     })
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<TicketDTO> create(@RequestBody @Valid @NonNull TicketCreateDTO dto) {
         var ticket = ticketService.create(dto.mapToModel());
         return ResponseEntity.created(URI.create("/tickets")).body(TicketDTO.mapFromModel(ticket));
     }
 
     @Operation(summary = "Get Tickets")
+    @ApiListResponse
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    @ApiListResponse
     public ResponseEntity<List<TicketDTO>> getAll(
             @Parameter(description = "filter by ticket status [ALL, UPCOMING, CANCELLED, AVAILABLE, ENDED, SOLD_OUT")
             @Pattern(regexp = "ALL|UPCOMING|CANCELLED|AVAILABLE|ENDED|SOLD_OUT", message = "status must be one of [ALL, UPCOMING, CANCELLED, AVAILABLE, ENDED, SOLD_OUT")
