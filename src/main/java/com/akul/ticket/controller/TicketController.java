@@ -2,9 +2,9 @@ package com.akul.ticket.controller;
 
 import com.akul.ticket.annotation.ApiCreateResponse;
 import com.akul.ticket.annotation.ApiListResponse;
-import com.akul.ticket.dto.ErrorDTO;
-import com.akul.ticket.dto.TicketCreateDTO;
-import com.akul.ticket.dto.TicketDTO;
+import com.akul.ticket.dto.response.ErrorDTO;
+import com.akul.ticket.dto.request.TicketCreateDTO;
+import com.akul.ticket.dto.response.TicketDTO;
 import com.akul.ticket.service.TicketService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

@@ -1,4 +1,4 @@
-package com.akul.ticket.dto;
+package com.akul.ticket.dto.response;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;

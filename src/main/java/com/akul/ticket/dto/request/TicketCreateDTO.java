@@ -1,4 +1,4 @@
-package com.akul.ticket.dto;
+package com.akul.ticket.dto.request;
 
 import com.akul.ticket.annotation.ValidUUID;
 import com.akul.ticket.enums.TicketStatus;

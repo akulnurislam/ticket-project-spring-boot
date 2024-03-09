@@ -1,6 +1,6 @@
 package com.akul.ticket.exception;
 
-import com.akul.ticket.dto.ErrorDTO;
+import com.akul.ticket.dto.response.ErrorDTO;
 import com.akul.ticket.util.DateUtil;
 import com.akul.ticket.util.StringUtil;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;

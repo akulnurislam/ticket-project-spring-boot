@@ -1,6 +1,6 @@
 package com.akul.ticket.annotation;
 
-import com.akul.ticket.dto.ErrorDTO;
+import com.akul.ticket.dto.response.ErrorDTO;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

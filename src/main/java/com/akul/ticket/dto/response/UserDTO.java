@@ -1,4 +1,4 @@
-package com.akul.ticket.dto;
+package com.akul.ticket.dto.response;
 
 import com.akul.ticket.model.User;
 import io.swagger.v3.oas.annotations.media.Schema;

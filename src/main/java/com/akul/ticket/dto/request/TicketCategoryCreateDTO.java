@@ -1,4 +1,4 @@
-package com.akul.ticket.dto;
+package com.akul.ticket.dto.request;
 
 import com.akul.ticket.model.TicketCategory;
 import io.swagger.v3.oas.annotations.media.Schema;

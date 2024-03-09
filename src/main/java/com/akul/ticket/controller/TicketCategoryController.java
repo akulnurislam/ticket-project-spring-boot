@@ -2,8 +2,8 @@ package com.akul.ticket.controller;
 
 import com.akul.ticket.annotation.ApiCreateResponse;
 import com.akul.ticket.annotation.ApiListResponse;
-import com.akul.ticket.dto.TicketCategoryCreateDTO;
-import com.akul.ticket.dto.TicketCategoryDTO;
+import com.akul.ticket.dto.request.TicketCategoryCreateDTO;
+import com.akul.ticket.dto.response.TicketCategoryDTO;
 import com.akul.ticket.service.TicketCategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

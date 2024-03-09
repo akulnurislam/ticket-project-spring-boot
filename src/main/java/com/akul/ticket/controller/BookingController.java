@@ -1,7 +1,7 @@
 package com.akul.ticket.controller;
 
 import com.akul.ticket.annotation.ApiCreateResponse;
-import com.akul.ticket.dto.ErrorDTO;
+import com.akul.ticket.dto.response.ErrorDTO;
 import com.akul.ticket.dto.request.BookingCreateDTO;
 import com.akul.ticket.dto.response.BookingDTO;
 import com.akul.ticket.service.BookingService;
