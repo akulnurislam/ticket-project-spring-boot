@@ -22,12 +22,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorDTO> handleMethodArgumentNotValidException(@NonNull MethodArgumentNotValidException ex, @NonNull WebRequest req) {
-        List<String> fields = new ArrayList<>();
-        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            String fieldMessage = String.format("%s - %s", error.getField(), error.getDefaultMessage());
+        var fields = new ArrayList<String>();
+        for (var error : ex.getBindingResult().getFieldErrors()) {
+            var fieldMessage = String.format("%s - %s", error.getField(), error.getDefaultMessage());
             fields.add(fieldMessage);
         }
-        ErrorDTO errorDTO = ErrorDTO.builder()
+        var errorDTO = ErrorDTO.builder()
                 .timestamp(Date.timestamp())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
@@ -42,7 +42,7 @@ public class GlobalExceptionHandler {
             @NonNull DataIntegrityViolationException ex, @NonNull WebRequest req) {
         if (ex.getRootCause() != null && ex.getRootCause() instanceof PSQLException psqlEx)  {
             if (PSQLState.UNIQUE_VIOLATION.getState().equals(psqlEx.getSQLState())) {
-                ErrorDTO errorDTO = ErrorDTO.builder()
+                var errorDTO = ErrorDTO.builder()
                         .timestamp(Date.timestamp())
                         .status(HttpStatus.CONFLICT.value())
                         .error(HttpStatus.CONFLICT.getReasonPhrase())
@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
             }
         }
 
-        ErrorDTO errorDTO = ErrorDTO.builder()
+        var errorDTO = ErrorDTO.builder()
                 .timestamp(Date.timestamp())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
