@@ -4,6 +4,7 @@ import com.akul.ticket.model.User;
 import com.akul.ticket.repository.UserRepository;
 import com.akul.ticket.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAll() {
-        return userRepository.findAll();
+        var sort = Sort.by(Sort.Direction.DESC, "createdAt");
+        return userRepository.findAll(sort);
     }
 }

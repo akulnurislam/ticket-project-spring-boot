@@ -8,6 +8,7 @@ import com.akul.ticket.repository.TicketRepository;
 import com.akul.ticket.service.TicketCategoryService;
 import com.akul.ticket.service.TicketService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
@@ -45,12 +46,13 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<Ticket> getAll(String status) {
+        var sort = Sort.by(Sort.Direction.DESC, "createdAt");
         TicketStatus ticketStatus = TicketStatus.valueOfOrNull(status);
 
         if (Objects.isNull(ticketStatus)) {
-            return ticketRepository.findAll();
+            return ticketRepository.findAll(sort);
         }
 
-        return ticketRepository.findAllByStatus(ticketStatus);
+        return ticketRepository.findAllByStatus(ticketStatus, sort);
     }
 }
