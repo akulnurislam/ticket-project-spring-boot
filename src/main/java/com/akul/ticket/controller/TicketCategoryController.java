@@ -33,7 +33,7 @@ public class TicketCategoryController {
     @ApiCreateResponse
     public ResponseEntity<TicketCategoryDTO> create(@RequestBody @Valid @NonNull TicketCategoryCreateDTO dto) {
         var ticketCategory = ticketCategoryService.create(dto.mapToModel());
-        return ResponseEntity.created(URI.create("/users")).body(TicketCategoryDTO.mapFromModel(ticketCategory));
+        return ResponseEntity.created(URI.create("/ticket-categories")).body(TicketCategoryDTO.mapFromModel(ticketCategory));
     }
 
     @Operation(summary = "Get Ticket Categories")
