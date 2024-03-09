@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
         @ApiResponse(responseCode = "201", description = "created"),
         @ApiResponse(responseCode = "400", description = "bad request", content = @Content(schema = @Schema(implementation = ErrorDTO.class))),
         @ApiResponse(responseCode = "409", description = "conflict or duplicate", content = @Content(schema = @Schema(implementation = ErrorDTO.class))),
-        @ApiResponse(responseCode = "500", description = "internal server error", content = @Content(schema = @Schema(implementation = ErrorDTO.class)))
+        @ApiResponse(responseCode = "500", description = "internal server error", content = @Content(schema = @Schema(implementation = ErrorDTO.class))),
 })
 public @interface ApiCreateResponse {
 }
