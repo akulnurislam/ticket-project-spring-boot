@@ -20,7 +20,7 @@ public class Ticket {
     @Column(name = "id_ticket", columnDefinition = "uuid", nullable = false)
     private UUID id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_ticket_category", nullable = false)
     private TicketCategory ticketCategory;
 

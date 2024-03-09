@@ -31,6 +31,6 @@ public class User {
     private Date updatedAt;
 
     // example
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Booking> bookings;
 }
