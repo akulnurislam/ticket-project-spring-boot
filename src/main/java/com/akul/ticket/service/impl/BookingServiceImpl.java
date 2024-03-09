@@ -76,10 +76,14 @@ public class BookingServiceImpl implements BookingService {
         booking.setUpdatedAt(now);
         var bookingCreated = bookingRepository.save(booking);
 
+        // validate quantity
         // update quota remaining ticket
         // update status ticket if quota remaining zero then sold_out
         var quantity = bookingCreated.getQuantity();
         var quotaRemaining = ticket.getQuotaRemaining() - quantity;
+        if (quotaRemaining < 0) {
+            throw new ConflictException("quota remaining insufficient");
+        }
         ticket.setQuotaRemaining(quotaRemaining);
         if (quotaRemaining == 0) {
             ticket.setStatus(TicketStatus.SOLD_OUT);
