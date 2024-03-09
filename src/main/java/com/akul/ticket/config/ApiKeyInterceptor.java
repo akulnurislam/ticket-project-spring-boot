@@ -38,7 +38,7 @@ public class ApiKeyInterceptor implements HandlerInterceptor {
         var auth = request.getHeader(HttpHeaders.AUTHORIZATION);
         var user = userService.getByUsername(auth);
         if (user.isEmpty()) {
-            throw new UnauthorizedException("invalid username");
+            throw new UnauthorizedException("missing or invalid username, please put in header Authorization: <username>");
         }
         return true;
     }
