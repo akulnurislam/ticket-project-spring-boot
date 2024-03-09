@@ -104,6 +104,28 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(errorDTO);
     }
 
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<ErrorDTO> handleConflictException(@NonNull ConflictException ex, @NonNull WebRequest req) {
+        ErrorDTO errorDTO = ErrorDTO.builder()
+                .timestamp(DateUtil.timestamp())
+                .status(HttpStatus.CONFLICT.value())
+                .error(ex.getMessage())
+                .path(req.getDescription(false).substring(4))
+                .build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorDTO);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorDTO> handleNotFoundException(@NonNull NotFoundException ex, @NonNull WebRequest req) {
+        ErrorDTO errorDTO = ErrorDTO.builder()
+                .timestamp(DateUtil.timestamp())
+                .status(HttpStatus.NOT_FOUND.value())
+                .error(ex.getMessage())
+                .path(req.getDescription(false).substring(4))
+                .build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDTO);
+    }
+
     private String extractEnumValues(String errorMessage) {
         var joiner = new StringJoiner(", ", "[", "]");
         var pattern = Pattern.compile("\\[([^]]+)]");
