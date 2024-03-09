@@ -1,12 +1,11 @@
 package com.akul.ticket.controller;
 
 import com.akul.ticket.annotation.ApiCreateResponse;
+import com.akul.ticket.annotation.ApiListResponse;
 import com.akul.ticket.dto.TicketCategoryCreateDTO;
 import com.akul.ticket.dto.TicketCategoryDTO;
 import com.akul.ticket.service.TicketCategoryService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -39,9 +38,7 @@ public class TicketCategoryController {
     @Operation(summary = "Get Ticket Categories")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "ok")
-    })
+    @ApiListResponse
     public ResponseEntity<List<TicketCategoryDTO>> getAll() {
         var ticketCategories = ticketCategoryService.getAll();
         return ResponseEntity.ok(TicketCategoryDTO.mapFromModels(ticketCategories));

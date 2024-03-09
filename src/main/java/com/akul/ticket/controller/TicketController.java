@@ -1,6 +1,7 @@
 package com.akul.ticket.controller;
 
 import com.akul.ticket.annotation.ApiCreateResponse;
+import com.akul.ticket.annotation.ApiListResponse;
 import com.akul.ticket.dto.ErrorDTO;
 import com.akul.ticket.dto.TicketCreateDTO;
 import com.akul.ticket.dto.TicketDTO;
@@ -47,10 +48,7 @@ public class TicketController {
     @Operation(summary = "Get Tickets")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "ok"),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content(schema = @Schema(implementation = ErrorDTO.class))),
-    })
+    @ApiListResponse
     public ResponseEntity<List<TicketDTO>> getAll(
             @Parameter(description = "filter by ticket status [ALL, UPCOMING, CANCELLED, AVAILABLE, ENDED, SOLD_OUT")
             @Pattern(regexp = "ALL|UPCOMING|CANCELLED|AVAILABLE|ENDED|SOLD_OUT", message = "status must be one of [ALL, UPCOMING, CANCELLED, AVAILABLE, ENDED, SOLD_OUT")
