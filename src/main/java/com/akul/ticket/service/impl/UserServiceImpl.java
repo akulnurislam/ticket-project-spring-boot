@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -20,8 +21,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isExistsByUsername(String username) {
-        return userRepository.findByUsername(username).isPresent();
+    public Optional<User> getByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     @Override
