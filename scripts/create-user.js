@@ -9,7 +9,6 @@ export const options = {
 };
 
 export default function() {
-
   const headers = {
     'Content-Type': 'application/json',
   };
