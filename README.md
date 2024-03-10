@@ -90,6 +90,7 @@ APIs simple service for concert ticket reservation.
 ## Specification
 
 - Unit Test
+- Load Test
 - API Documentations - OpenAPI (Swagger)
 
 ## Run App
@@ -100,7 +101,56 @@ APIs simple service for concert ticket reservation.
 
 ### Test
 
+#### Unit Test
+
 - `$ ./mvnw test`
+
+#### Load Test
+
+- using **k6**
+- `scripts` directory as k6 script files
+- `$ k6 run <script.js>`  run the script
+
+example: (150 RPS target)
+
+- <details>
+  <summary>create user</summary>
+  
+  ![image](scripts/result-create-user.png "create user result load test")
+
+  Total 4500 requests with different VUs (4500) and all requests have status 201 meaning the user was created successfully.  
+  **RPS: 145**
+
+  </details>
+- <details>
+  <summary>booking</summary>
+  
+  Before run booking script, create a _ticket-category_ first then create a _ticket_ with _**status AVAILABLE**_ and _**quota 3000**_
+
+  ```json
+  {
+    "id": "aed78802-5c75-4714-8500-a971a0c9a210",
+    "ticket_category_id": "7a16e0ba-8e0a-472a-b1a1-e13374cc6f45",
+    "name": "Dangdut Mania Concert 2024",
+    "status": "AVAILABLE",
+    "quota": 3000,
+    "quotaRemaining": 3000,
+    "available_from": "08:00 PM",
+    "available_to": "10:00 PM"
+  }
+  ```
+  
+  `$ k6 run booking.js`
+  
+  ![image](scripts/result-booking.png "booking result load test")
+
+  Total 4500 requests with different VUs (4500)  
+  **RPS: 145**  
+  only _66% of total requests_, that means only **3000 requests** were successfully booked, no excess tickets sold as expected  
+  _33% of total requests_, they ran out of tickets  
+  and only _0%_ or _10 users out of  4500 users_ experienced an error
+
+  </details>
 
 ### Start
 
