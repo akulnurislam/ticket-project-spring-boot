@@ -13,8 +13,44 @@ APIs simple service for concert ticket reservation.
 - User is able to search available concerts
 - User is able to book a ticket according to selected concert within **specific hour**, with **limited number** of tickets
   - example: 1000 tickets can only purchase between 09:00 AM to 10:100 AM
+  - <details><summary>tickets table</summary>
+
+    ```java
+    @Entity
+    @Table(name = "tickets")
+    public class Ticket {
+        @Column(name = "available_from", nullable = false)
+        private java.sql.Time availableFrom;
+
+        @Column(name = "available_to", nullable = false)
+        private java.sql.Time availableTo;
+
+        @Column(name = "quota", nullable = false)
+        private Integer quota;
+
+        @Column(name = "quota_remaining", nullable = false)
+        private Integer quotaRemaining;
+    }
+    ```
+    </details>
 - User is not allowed to multiple booking requests
+  - <details><summary>composite unique index</summary>
+
+    ```java
+    @Table(name = "bookings", uniqueConstraints = {
+            @UniqueConstraint(columnNames = {"id_user", "id_ticket"})
+    });
+    ```
+    </details>
 - Avoid race booking (prevent excess number of tickets)
+  - <details><summary>isolation level serializable</summary>
+
+    ```java
+    @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public UserBooking create(@NonNull Booking booking) {}
+    ```
+    </details>
 
 ## Database Design
 
